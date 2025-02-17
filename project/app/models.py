@@ -1,49 +1,53 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
-# Extending Django's User Model
-class CustomUser(AbstractUser):
-    USER_TYPES = [
-        ('client', 'Client'),
-        ('service', 'Service Provider'),
-    ]
-    user_type = models.CharField(max_length=10, choices=USER_TYPES, default='client')
-
-    def is_client(self):
-        return self.user_type == 'client'
-
-    def is_service_provider(self):
-        return self.user_type == 'service'
 
 
+class User(models.Model):
+    Email = models.EmailField(unique=True)
+    username = models.TextField()
+    phonenumber = models.IntegerField()
+    password = models.TextField()
+    location = models.TextField()
+    idproof = models.CharField(max_length=12) 
+    profile_picture = models.ImageField(upload_to='profile_pics/', default='profile_pics/default.png')  # Ensure the default image is in the correct path.
+    def __str__(self):
+        return self.username
 
-from django.db import models
-from django.contrib.auth.models import User
-from django.conf import settings
-
-
-
-# Department model to categorize complaints
-class Department(models.Model):
-    name = models.CharField(max_length=100)
-    
+class Police(models.Model):
+    Email = models.EmailField(unique=True)
+    name = models.TextField()
+    # phonenumber = models.IntegerField()
+    password = models.TextField()
+    # location= models.TextField()
     def __str__(self):
         return self.name
-
-# Complaint model to store user complaints
-class Complaint(models.Model):
-    STATUS_CHOICES = [
-        ('open', 'Open'),
-        ('in_progress', 'In Progress'),
-        ('resolved', 'Resolved'),
-    ]
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    description = models.TextField()
-    category = models.ForeignKey(Department, on_delete=models.CASCADE)  # Categorize complaint by department
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
-    date_submitted = models.DateTimeField(auto_now_add=True)
     
+class Complaint(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    police = models.ForeignKey(Police, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=255)
+    description = models.TextField()
+    status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Registered', 'Registered'), ('Resolved', 'Resolved')], default='Pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    registered_at = models.DateTimeField(null=True, blank=True)  # Optional
     def __str__(self):
-        return f"Complaint by {self.user.username} in {self.category.name} - Status: {self.status}"
+        return f"Complaint by {self.user.username} - {self.subject}"
+    
+class Chat(models.Model):
+    police=models.ForeignKey(Police, on_delete=models.CASCADE)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.user.username
+    
+
+class Message(models.Model):
+    complaint=models.ForeignKey(Complaint, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Message for Complaint {self.complaint.id} by {self.complaint.user.username}"

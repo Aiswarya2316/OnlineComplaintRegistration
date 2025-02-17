@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>CrimeLog</title>
+    <style>
+
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+
+        #nav {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-color: #343a40;
+            height: 80px;
+        }
+
+        .navbar .nav-link:active{
+            color: #007bff;
+        }
+
+        .navbar-brand img {
+            max-height: 60px;
+        }
+
+        .navbar .nav-link {
+            color: #fff;
+            transition: color 0.3s ease;
+            margin: 10px;
+        }
+
+        .navbar .nav-link:hover {
+            color: #91aafa;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        /* .search-bar {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-bar input {
+            padding-left: 40px;
+            border: 1px solid #ced4da;
+            border-radius: 25px;
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #6c757d;
+
+        } */
+
+        /* Profile dropdown styles */
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            background-color: #343a40;
+        }
+
+        .dropdown-menu {
+            min-width: 200px;
+            background-color: #2c2727; /* Black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: #fff; /* White text */
+            
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #4d73f1;
+            color: #fff;
+        }
+
+
+        h3{
+            text-align: center;
+        }
+
+
+        /* ########################## map ##################### */
+        
+
+
+
+        #map-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        /* Header Styling */
+        #map-header {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(45deg, #007bff, #4d73f1);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Map Container Styling */
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+
+        /* Footer */
+        #footer {
+            text-align: center;
+            margin: 20px 0;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+
+
+        /* ################################## responsive ########################### */
+
+        @media only screen and (max-width: 768px) {
+            .navbar-brand img {
+                max-height: 50px;
+                max-width: 200px;
+            }
+            #map {
+                height: 400px;
+            }
+
+            #map-header {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media only screen and (max-width:  992px) {
+     
+            #mynavbar {
+            background-color: #2c2727;
+
+            }
+            .search-bar{
+                margin-left: 20px;
+            }
+            #profileDropdown{
+                margin: 10px;
+            }
+        }  
+
+        @media only screen and (max-width: 992px) and (max-height: 900px) {
+            .dropdown-menu{
+                max-height: 230px;
+                overflow: scroll;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="../userhome">
+                <img id="logo" src="../static/images/complaints-text-on-red-round-grungy-texture-stamp-2HEHM9A.jpg" alt="CrimeLog">
+            </a>
+
+            <!-- Toggler for smaller screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar content -->
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../submit_complaint">Give Complaint</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../userhistory">Registered Complaint</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../viewpolices">View Police</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="../message">Ask Anything</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contactus">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about">About Us</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="../logout">Logout</a>
+                    </li> -->
+                </ul>
+
+                      <!-- Search bar -->
+                <!-- <div class="search-bar">
+                    <span class="search-icon"><i class="bi bi-search"></i></span>
+                    <form class="d-flex" method="post" action="{% url 'usersearch' %}">
+                        {% csrf_token %}
+                        <input class="form-control" type="text" name="query" placeholder="Search for...">
+                        <button type="submit" class="btn btn-primary" ></button>
+                    </form>
+                </div> -->
+
+                <!-- Profile Dropdown -->
+                <div class="dropdown ms-3">
+                    <button class="btn btn-link dropdown p-0 border-0" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="static/images/profile.png" alt="Profile" class="profile-img">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li class="text-center">
+                            <img src="../static/images/profile.png" alt="User" class="my-2">
+                            <div style="color: white;"><strong>User Name</strong></div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="../userprofile">View Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="../logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <h3>Contact</h3>
+<div class="container my-4">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Station Name</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.Email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+   
+
+        <!-- Map Container -->
+        <div id="map-container">
+            <!-- Header -->
+            <div id="map-header">
+                Police Stations in Kerala
+            </div>
+    
+            <!-- Google Map -->
+            <div id="map" style="width: 100%; height: 600px;"></div>
+
+        </div>
+
+        {% comment %} <div>
+            {% for i in data %}
+            <div>
+                <strong>Station :</strong>{{i.name}}<br>
+                <strong>Email :</strong>{{i.Email}}
+            </div>
+            {% endfor %}
+        </div> {% endcomment %}
+    
+        <!-- Footer -->
+        <div id="footer">
+            &copy; 2024 CrimeLog | Designed for Kerala Police Mapping
+        </div>
+        <script>
+            let map; // Declare map as a global variable
+        
+            function initMap() {
+                // Center the map on Kerala, India
+                const keralaCenter = { lat: 10.8505, lng: 76.2711 };
+        
+                // Initialize the map
+                map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 7,
+                    center: keralaCenter,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    fullscreenControl: true,
+                });
+        
+                // Add static markers (for testing purposes)
+                addStaticMarkers();
+        
+                // Fetch dynamic police station data from the server
+                fetchDynamicMarkers();
+            }
+        
+            // Add static markers for testing
+            function addStaticMarkers() {
+                const policeStations = [
+                    { name: "Thiruvananthapuram Police Station", location: { lat: 8.5241, lng: 76.9366 } },
+                    { name: "Kochi Police Station", location: { lat: 9.9312, lng: 76.2673 } },
+                    { name: "Kozhikode Police Station", location: { lat: 11.2588, lng: 75.7804 } },
+                    { name: "Thrissur Police Station", location: { lat: 10.5276, lng: 76.2144 } },
+                    { name: "Kannur Police Station", location: { lat: 11.8745, lng: 75.3704 } },
+                    { name: "Alappuzha Police Station", location: { lat: 9.4981, lng: 76.3388 } },
+                    { name: "Palakkad Police Station", location: { lat: 10.7743, lng: 76.6514 } },
+                    { name: "Kottayam Police Station", location: { lat: 9.5916, lng: 76.5222 } },
+                ];
+        
+                policeStations.forEach(station => {
+                    const marker = new google.maps.Marker({
+                        position: station.location,
+                        map: map,
+                        title: station.name,
+                    });
+        
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<strong>${station.name}</strong>`,
+                    });
+        
+                    marker.addListener("click", () => {
+                        infoWindow.open(map, marker);
+                    });
+                });
+            }
+        
+            // Fetch dynamic markers from the server
+            function fetchDynamicMarkers() {
+                fetch('/api/police_stations')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        data.forEach(station => {
+                            const marker = new google.maps.Marker({
+                                position: { lat: station.latitude, lng: station.longitude },
+                                map: map,
+                                title: station.name,
+                            });
+        
+                            const infoWindow = new google.maps.InfoWindow({
+                                content: `<strong>${station.name}</strong>`,
+                            });
+        
+                            marker.addListener("click", () => {
+                                infoWindow.open(map, marker);
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error fetching police stations:", error);
+                    });
+            }
+        
+            // Initialize the map when the window loads
+            window.onload = initMap;
+        </script>
+        
+    
+    
+</body>
+</html>

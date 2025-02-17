@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>CrimeLog</title>
+    <style>
+
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+
+#nav {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-color: #343a40;
+            height: 80px;
+        }
+
+        .navbar-brand img {
+            max-height: 60px;
+        }
+
+        .navbar .nav-link {
+            color: #fff;
+            transition: color 0.3s ease;
+            margin: 10px;
+        }
+
+        .navbar .nav-link:hover {
+            color: #91aafa;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+
+        .search-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #fff;
+    width: 300px; /* Adjust width as needed */
+}
+
+        /* .search-input-group .search-icon {
+    position: absolute;
+    left: 15px;
+    color: #6c757d;
+    font-size: 1rem;
+    pointer-events: none;
+} */
+
+.search-input-group form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search-input-group input {
+    flex: 1;
+    border: none;
+    padding: 10px 10px 10px 40px; /* Padding to create space for the icon */
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.search-input-group button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.search-input-group button:hover {
+    background-color: #0056b3;
+}
+
+.search-input-group input:focus {
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+   /* Profile dropdown styles */
+   .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+            background-color: #343a40;
+        }
+
+        .dropdown-menu {
+            min-width: 200px;
+            background-color: #2c2727; /* Black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: #fff; /* White text */
+            
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #4d73f1;
+            color: #fff;
+        }
+
+
+
+        h2{
+            text-align: center;
+            margin: 50px;
+        }
+
+
+        /* ##################### card ################# */
+
+
+           /* Container for the cards */
+   /* Container for the cards */
+   .card-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Default: 1 card per row (small screens) */
+    gap: 50px; /* Space between cards */
+    justify-content: center; /* Center align the grid horizontally */
+    padding: 20px;
+    max-width: 800px; /* Restrict the grid width to prevent excess space */
+    margin: 0 auto; /* Center the container itself */
+}
+
+
+
+/* Card link styling */
+.card-link {
+    text-decoration: none;
+    margin: 0px;
+}
+
+/* Card styling */
+.card {
+    display: grid;
+    grid-template-rows: auto 1fr; /* Two rows: image and content */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    max-width: 400px; /* Optional to restrict the card size */
+}
+
+/* Image style */
+.card img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover; /* Ensure the image covers the area without distorting */
+}
+
+/* Content styling */
+.card-content {
+    padding: 15px;
+    height: 150px;
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+
+       
+        /* responsive */
+
+
+        @media only screen and (max-width:  992px) {
+            #mynavbar {
+            background-color: #2c2727;
+
+            }
+            .search-bar{
+                margin-left: 15px;
+            }
+            #profileDropdown{
+                margin: 10px;
+            }
+            .card{
+                min-width: 100%;
+            }
+            /* .card-container { */
+                /* grid-template-columns: repeat(2, 1fr);  */
+                /* margin-left: 10%; */
+            /* } */
+            /* .card {
+                max-width: 300px;
+            } */
+        }  
+        /* @media (min-width: 992px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr); 
+                margin-left: 13%;
+            }
+            .card {
+                width: 500px;
+            }
+        } */
+        /* @media (max-width: 1200px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr); 
+                margin-left: 7%;
+            }
+            .card {
+                min-width: 300px;
+            }
+        } */
+
+        @media (max-width: 768px) {
+
+            .navbar-brand img {
+                max-height: 50px;
+                max-width: 200px;
+            }
+            /* .card-container {
+                grid-template-columns: repeat(1, 1fr); 
+                margin-left: -10px;
+                
+            }
+
+            .card img {
+                height: 150px; 
+            }
+            .card {
+                max-width: 400px;
+            } */
+            #home{
+                height: 200px;
+            }
+        }
+        @media (min-width: 768px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+            }
+        }
+
+
+        @media (min-width: 1200px) {
+            .card-container {
+                padding: 40px; /* Add extra spacing if needed */
+                gap: 100px;
+            }
+            .card{
+                min-width: 500px;
+            }
+        }
+
+        @media only screen and (max-width:  1200px) {
+            .search-input-group{
+                max-width: 200px;
+            }
+            #srch-btn{
+                max-width: 70px;
+            }
+        }
+
+        @media only screen and (max-width: 992px) and (max-height: 900px) {
+            .dropdown-menu{
+                max-height: 230px;
+                overflow: scroll;
+                margin-bottom: 10px;
+            }
+            .search-input-group{
+                max-width: 300px;
+            }
+            #srch-btn{
+                max-width: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="../userhome">
+                <img id="logo" src="../static/images/complaints-text-on-red-round-grungy-texture-stamp-2HEHM9A.jpg" alt="CrimeLog">
+            </a>
+
+            <!-- Toggler for smaller screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar content -->
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../submit_complaint">Give Complaint</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../userhistory">Registered Complaint</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../viewpolices">View Police</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="../message">Ask Anything</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contactus">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about">About Us</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="../logout">Logout</a>
+                    </li> -->
+                </ul>
+
+                      <!-- Search bar -->
+                        
+                      <div class="search-input-group">
+                        <!-- <span class="search-icon"><i class="bi bi-search"></i></span> -->
+                        <form method="post" action="{% url 'police_search' %}">
+                            {% csrf_token %}
+                            <input class="form-control" type="text" name="query" placeholder="Search by name or email...">
+                            <button class="btn btn-primary" id="srch-btn" type="submit">Search</button>
+                        </form>
+                    </div>
+
+                <!-- Profile Dropdown -->
+                <div class="dropdown ms-3">
+                    <button class="btn btn-link dropdown p-0 border-0" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../static/images/profile.png" alt="Profile" class="profile-img">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li class="text-center">
+                            <img src="../static/images/profile.png" alt="User" class="my-2">
+                            <div style="color: white;"><strong>User Name</strong></div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="../userprofile">View Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="../logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <img id="home" src="../static/images/home1.png" width="100%" height="550px">
+    </div>
+
+    <!-- <h2 id="h2">Your Complaint History</h2> -->
+
+    <h2>Explore more</h2>
+    <div class="container py-5">
+        <div class="card-container">
+            <!-- Card 1 -->
+            <a class="card-link" href="../submit_complaint">
+                <div class="card">
+                    <img src="../static/images/compl(1).jpg" alt="Card Image">
+                    <div class="card-content">
+                        <h3>New Complaints</h3>
+                        <p>Submit and track your complaints effortlessly. Keep us informed about issues that matter to you, and we’ll ensure timely resolutions.</p>
+                    </div>
+                </div>
+            </a>        
+    
+            <!-- Card 2 -->
+            <a class="card-link" href="../userhistory">
+                <div class="card">
+                    <img src="../static/images/history.webp" alt="Card Image">
+                    <div class="card-content">
+                        <h3>User History</h3>
+                        <p>Access and review your past interactions, submissions, and activities. Stay informed with a detailed history of your account.</p>
+                    </div>
+                </div>
+            </a>        
+    
+            <!-- Card 3 -->
+            <a class="card-link" href="../about">
+                <div class="card">
+                    <img src="../static/images/chat.webp" alt="Card Image">
+                    <div class="card-content">
+                        <h3>About Us</h3>
+                        <p>Learn more about our mission, values, and the team behind our services. Discover how we strive to make a difference.</p>
+                    </div>
+                </div>
+            </a>        
+    
+            <!-- Card 4 -->
+            <a class="card-link" href="../contactus">
+                <div class="card">
+                    <img src="../static/images/contactus(1)(1).jpg" alt="Card Image">
+                    <div class="card-content">
+                        <h3>Contact Us</h3>
+                        <p>Reach out to us with your questions, feedback, or concerns. We're here to help and look forward to hearing from you.</p>
+                    </div>
+                </div>
+            </a>        
+        </div>
+    </div>
+    
+    <footer style="background-color: #2c3e50; color: #ecf0f1; padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+    
+            <!-- Branding -->
+            <h3 style="margin-bottom: 10px;">CrimeLog</h3>
+            <p style="font-size: 14px; margin-bottom: 20px;">Your trusted partner in ensuring justice and safety.</p>
+    
+            <!-- Quick Links -->
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                <a href="../userhome" style="color: #ecf0f1; text-decoration: none; font-size: 14px;">Home</a>
+                <a href="../submit_complaint" style="color: #ecf0f1; text-decoration: none; font-size: 14px;">File a Complaint</a>
+                <a href="../userhistory" style="color: #ecf0f1; text-decoration: none; font-size: 14px;">Track Complaint Status</a>
+                <!-- <a href="../userchat" style="color: #ecf0f1; text-decoration: none; font-size: 14px;">Ask a Question</a> -->
+                <a href="../contactus" style="color: #ecf0f1; text-decoration: none; font-size: 14px;">Contact Us</a>
+            </div>
+    
+            <!-- Contact Information -->
+            <!-- <div style="font-size: 14px; margin-bottom: 20px;">
+                <p>📞 <strong>Helpline Number:</strong> +1-800-CRIMELOG</p>
+                <p>📧 <strong>Email:</strong> <a href="mailto:support@crimelog.com" style="color: #1abc9c; text-decoration: none;">support@crimelog.com</a></p>
+                <p><strong>Address:</strong> 123 Justice Avenue, Safety City, State, Zip Code</p>
+            </div> -->
+    
+            <!-- Disclaimer -->
+            <div style="font-size: 12px; margin-bottom: 10px; color: #bdc3c7;">
+                <p>All information provided on this platform is handled securely and confidentially. CrimeLog is an official channel to report incidents directly to law enforcement agencies. Misuse of this platform is subject to legal action.</p>
+            </div>
+    
+            <!-- Copyright -->
+            <div style="font-size: 12px; color: #95a5a6;">
+                <p>© 2024 <strong>CrimeLog</strong> | All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+    <!-- Bootstrap JS (optional, for responsiveness features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+</body>
+</html>

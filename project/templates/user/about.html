@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>CrimeLog - About Us</title>
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F4F6F9;
+            color: #333;
+        }
+
+        /* Navbar */
+        #nav {
+            background-color: #1E2A38;
+            padding: 10px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand img {
+            max-height: 50px;
+        }
+
+        .navbar .nav-link {
+            color: #FFF;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-link:hover {
+            color: #4A90E2;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Profile Dropdown */
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #FFF;
+        }
+
+        .dropdown-menu {
+            background-color: #1E2A38;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: #FFF;
+            transition: background 0.3s;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #4A90E2;
+        }
+
+        /* Main Content */
+        main {
+            padding: 50px 20px;
+        }
+
+        .about-us {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background: linear-gradient(to bottom, #ffffff, #f0f8ff);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-us h1, .about-us h2 {
+            color: #1E2A38;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .about-us p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-us ul, .about-us ol {
+            padding-left: 20px;
+        }
+
+        .about-us ul li, .about-us ol li {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1E2A38;
+            color: #FFF;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .about-us {
+                padding: 20px;
+            }
+
+            .navbar-brand img {
+                max-height: 40px;
+            }
+
+            footer {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../userhome">
+                <img id="logo" src="../static/images/complaints-text-on-red-round-grungy-texture-stamp-2HEHM9A.jpg" alt="CrimeLog">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="../submit_complaint">Give Complaint</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../userhistory">Registered Complaint</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../viewpolices">View Police</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contactus">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about">About Us</a></li>
+                </ul>
+                <!-- Profile Dropdown -->
+                <div class="dropdown ms-3">
+                    <button class="btn btn-link p-0 border-0" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../static/images/profile.png" alt="Profile" class="profile-img">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li class="text-center">
+                            <img src="../static/images/profile.png" alt="User" class="my-2">
+                            <div style="color: white;"><strong>User Name</strong></div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../userprofile">View Profile</a></li>
+                        <li><a class="dropdown-item" href="../logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="about-us">
+            <div class="container">
+                <h1>About CrimeLog</h1>
+                <p><strong>CrimeLog</strong> is your trusted online police complaint registration platform, allowing you to report crimes quickly and securely.</p>
+                
+                <h2>What We Do</h2>
+                <ul>
+                    <li>Report crimes like theft, fraud, assault, and cybercrimes.</li>
+                    <li>Track the status of your complaint in real-time.</li>
+                    <li>Ensure a seamless, secure, and confidential complaint registration process.</li>
+                </ul>
+                
+                <h2>Our Vision</h2>
+                <p>To create a safer community by providing an accessible and efficient crime reporting system for all citizens.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 CrimeLog. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

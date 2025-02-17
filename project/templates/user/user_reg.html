@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            padding: 30px 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -5px;
+            width: 60px;
+            height: 3px;
+            background: #2575fc;
+            border-radius: 25px;
+        }
+
+        .input-field {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 12px 15px;
+            padding-left: 45px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .input-field input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+        }
+
+        .input-field i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        .checkbox-content {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-content input {
+            margin-right: 10px;
+            accent-color: #2575fc;
+        }
+
+        .checkbox-content label {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .button input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2575fc;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .button input:hover {
+            background: #1a5ecc;
+        }
+
+        .login-signup {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-signup .text {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .login-signup .text a {
+            color: #2575fc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-signup .text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="title">Registration</span>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-field">
+                <input type="text" name="username" placeholder="Enter your name" required />
+                <i class="uil uil-user"></i>
+            </div>
+            <div class="input-field">
+                <input type="text" name="Email" placeholder="Enter your email" required />
+                <i class="uil uil-envelope icon"></i>
+            </div>
+            <div class="input-field">
+                <input type="tel" name="phonenumber" placeholder="Enter your phone number" required />
+                <i class="uil uil-phone icon"></i>
+            </div>
+            <div class="input-field">
+                <input type="text" name="location" placeholder="Enter your location" required />
+                <i class="uil uil-map-marker icon"></i>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" placeholder="Create a password" required />
+                <i class="uil uil-lock icon"></i>
+            </div>
+            <div class="input-field">
+                <input type="file" name="idproof" required />
+            </div>
+            <div class="checkbox-content">
+                <input type="checkbox" id="termCon" required />
+                <label for="termCon">I accept all terms and conditions</label>
+            </div>
+            <div class="button">
+                <input type="submit" value="Signup" />
+            </div>
+        </form>
+        <div class="login-signup">
+            <span class="text">Already a member? <a href="../">Login Now</a></span>
+        </div>
+    </div>
+ 
+</body>
+</html>
