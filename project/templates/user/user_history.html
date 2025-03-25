@@ -310,6 +310,7 @@ body {
         <table border="1" class="table">
             <thead>
                 <tr>
+                    <th>Image</th>
                     <th>Subject</th>
                     <th>Description</th>
                     <th>Status</th>
@@ -322,6 +323,14 @@ body {
             <tbody>
                 {% for complaint in complaints %}
                 <tr>
+                    <td>
+                        {% if complaint.image %}
+                            <img src="{{ complaint.image.url }}" alt="Complaint Image" width="50">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+                    
                     <td>{{ complaint.subject }}</td>
                     <td>{{ complaint.description }}</td>
                     <td>{{ complaint.status }}</td>

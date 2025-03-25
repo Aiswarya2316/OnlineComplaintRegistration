@@ -205,7 +205,11 @@ def submit_complaint(req):
     if req.method == 'POST':
         subject = req.POST['subject']
         description = req.POST['description']
-        police_id = req.POST.get('police')
+        police_id = req.POST['police']
+        police = Police.objects.get(id=police_id)
+        image = req.FILES.get('image')  # Handle image upload
+
+
 
         if not subject or not description or not police_id:
             messages.warning(req, "All fields are required!")
@@ -216,7 +220,8 @@ def submit_complaint(req):
             user=user,
             police=police,
             subject=subject,
-            description=description
+            description=description,
+            image=image
         )
         complaint.save()
         messages.success(req, "Complaint submitted successfully.")

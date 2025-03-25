@@ -26,9 +26,11 @@ class Complaint(models.Model):
     police = models.ForeignKey(Police, on_delete=models.CASCADE)
     subject = models.CharField(max_length=255)
     description = models.TextField()
+    image = models.ImageField(upload_to='complaint_images/', null=True, blank=True)  # New Image Field
     status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Registered', 'Registered'), ('Resolved', 'Resolved')], default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
     registered_at = models.DateTimeField(null=True, blank=True)  # Optional
+
     def __str__(self):
         return f"Complaint by {self.user.username} - {self.subject}"
     
