@@ -15,9 +15,9 @@ class User(models.Model):
 class Police(models.Model):
     Email = models.EmailField(unique=True)
     name = models.TextField()
-    # phonenumber = models.IntegerField()
+    phonenumber = models.IntegerField()
     password = models.TextField()
-    # location= models.TextField()
+    location= models.TextField()
     def __str__(self):
         return self.name
     
