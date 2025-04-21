@@ -342,6 +342,9 @@ def police_reg(req):
         name=req.POST['name']
         email=req.POST['Email']
         password=req.POST['password']
+        phonenumber=req.POST['phonenumber']
+        location=req.POST['location']
+
          # Validate email
         try:
             validate_email(email)
@@ -351,7 +354,7 @@ def police_reg(req):
 
         # Validate phone number (assuming 10-digit numeric format)
         try:
-            data=Police.objects.create(name=name,Email=email,password=password)
+            data=Police.objects.create(name=name,Email=email,password=password,phonenumber=phonenumber,location=location)
             data.save()
             return redirect(login)
         except:
@@ -516,7 +519,9 @@ def addstation(req):
         name = req.POST['name']
         Email = req.POST['Email']
         password = req.POST['password']
-        data=Police.objects.create(name=name,Email=Email,password=password)
+        phonenumber=req.POST['phonenumber']
+        location=req.POST['location']
+        data=Police.objects.create(name=name,Email=Email,password=password,phonenumber=phonenumber,location=location)
         data.save()
         return redirect(viewpolice)
     return render(req,'admin/addstation.html')
